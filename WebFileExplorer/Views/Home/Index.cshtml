@@ -1,0 +1,26 @@
+﻿@model FolderViewModel
+@{
+    ViewBag.Header = "Explorer";
+}
+
+<section class="main">
+    <div class="header">
+    @if (Model.Folder != null)
+    {
+        <h2>"Folder" - @Model.Folder.Name</h2>    
+    }
+    else
+    {
+        <h2>Root directory</h2>
+    }
+    </div>
+    <ul>
+    @if (Model.Folders != null && Model.Folders.Any())
+    {
+        @foreach (var item in Model.Folders)
+        {
+            <li><a asp-area="" asp-controller="Home" asp-action="OpenFolder" asp-route-id="@item.Id">@item.Name</a></li>
+        }
+    }
+    </ul>
+</section>
