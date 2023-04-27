@@ -7,6 +7,14 @@
     <form asp-controller="Home" asp-action="Import" method="post" enctype="multipart/form-data">
         <p>Import from JSON file <input type="file" name="data" /><input type="submit" value="import" /></p>
     </form>
+    @if (Model.Folders.Any())
+    {
+        <button><a asp-controller="Home" asp-action="Export">Export</a></button>
+    }
+    else
+    {
+        <p>Nothing to export</p>
+    }
     @ViewBag.Error
     @ViewBag.Success
     <div class="header">

@@ -22,17 +22,7 @@ namespace WebFileExplorer.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Folders", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Folders_Folders_RootFolderId",
-                        column: x => x.RootFolderId,
-                        principalTable: "Folders",
-                        principalColumn: "Id");
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Folders_RootFolderId",
-                table: "Folders",
-                column: "RootFolderId");
         }
 
         /// <inheritdoc />

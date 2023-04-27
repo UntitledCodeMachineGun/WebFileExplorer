@@ -21,7 +21,7 @@ namespace WebFileExplorer.Models.Repositories.EF
 
         public Folder GetFolder(int id)
         {
-            return context.Folders.FirstOrDefault(x => x.Id == id);
+            return context.Folders.FirstOrDefault(x => x.Id == id) ?? new Folder() { Name = "New Folder"};
         }
 
         public IQueryable<Folder> GetFolders()

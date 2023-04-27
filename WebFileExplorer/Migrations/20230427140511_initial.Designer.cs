@@ -12,7 +12,7 @@ using WebFileExplorer.Domain;
 namespace WebFileExplorer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230427130924_initial")]
+    [Migration("20230427140511_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -42,18 +42,7 @@ namespace WebFileExplorer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RootFolderId");
-
                     b.ToTable("Folders");
-                });
-
-            modelBuilder.Entity("WebFileExplorer.Models.Folder", b =>
-                {
-                    b.HasOne("WebFileExplorer.Models.Folder", "RootFolder")
-                        .WithMany()
-                        .HasForeignKey("RootFolderId");
-
-                    b.Navigation("RootFolder");
                 });
 #pragma warning restore 612, 618
         }

@@ -39,18 +39,7 @@ namespace WebFileExplorer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RootFolderId");
-
                     b.ToTable("Folders");
-                });
-
-            modelBuilder.Entity("WebFileExplorer.Models.Folder", b =>
-                {
-                    b.HasOne("WebFileExplorer.Models.Folder", "RootFolder")
-                        .WithMany()
-                        .HasForeignKey("RootFolderId");
-
-                    b.Navigation("RootFolder");
                 });
 #pragma warning restore 612, 618
         }

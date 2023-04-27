@@ -36,6 +36,10 @@ namespace WebFileExplorer.Controllers
         [HttpPost]
         public IActionResult Import(IFormFile data)
         {
+            if(data == null)
+            {
+                return RedirectToAction("Index");
+            }
             if (!Path.GetFileName(data.FileName).EndsWith(".json"))
             {
                 ViewBag.Error = "Invalid file type";
@@ -48,21 +52,41 @@ namespace WebFileExplorer.Controllers
                     data.CopyTo(fs);
                 }
 
-                StreamReader sr = new StreamReader(path);
-                var dataString = sr.ReadToEnd();
-                List<Folder> folders = JsonConvert.DeserializeObject<List<Folder>>(dataString);
-                folders.ForEach(x =>
+                using (StreamReader sr = new StreamReader(path))
                 {
-                    Folder folder = new Folder() 
+                    var dataString = sr.ReadToEnd();
+                    List<Folder> folders = JsonConvert.DeserializeObject<List<Folder>>(dataString);
+                    if (folders != null)
                     {
-                        Name = x.Name,
-                        RootFolderId = x.RootFolderId,
-                    };
-                    dataManager.Folders.SaveFolder(folder);
-                });
-                ViewBag.Success = "Done";
+                        folders.ForEach(x =>
+                        {
+                            Folder folder = new Folder()
+                            {
+                                Name = x.Name,
+                                RootFolderId = x.RootFolderId,
+                            };
+                            dataManager.Folders.SaveFolder(folder);
+                        });
+                    }
+                }
             }
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public FileResult Export() 
+        {
+            IQueryable<Folder> folders = dataManager.Folders.GetFolders();
+            var json = JsonConvert.SerializeObject(folders, Formatting.Indented);
+            var fileName = "Exported.json";
+            var path = Path.Combine(env.WebRootPath, "Exported/", fileName);
+            using (StreamWriter sw = new StreamWriter(path))
+            {
+                sw.Write(json);
+            }
+
+            byte[] bytes = System.IO.File.ReadAllBytes(path);
+            return File(bytes, "application/octet-stream", fileName);
         }
     }
 }
