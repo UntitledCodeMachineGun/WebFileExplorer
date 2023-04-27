@@ -4,6 +4,11 @@
 }
 
 <section class="main">
+    <form asp-controller="Home" asp-action="Import" method="post" enctype="multipart/form-data">
+        <p>Import from JSON file <input type="file" name="data" /><input type="submit" value="import" /></p>
+    </form>
+    @ViewBag.Error
+    @ViewBag.Success
     <div class="header">
     @if (Model.Folder != null)
     {

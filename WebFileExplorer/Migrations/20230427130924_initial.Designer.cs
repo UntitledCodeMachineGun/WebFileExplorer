@@ -12,7 +12,7 @@ using WebFileExplorer.Domain;
 namespace WebFileExplorer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230426210643_initial")]
+    [Migration("20230427130924_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -45,49 +45,6 @@ namespace WebFileExplorer.Migrations
                     b.HasIndex("RootFolderId");
 
                     b.ToTable("Folders");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Creating Digital Images"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Resources",
-                            RootFolderId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Evidence",
-                            RootFolderId = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Graphic Products",
-                            RootFolderId = 1
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Primary Sources",
-                            RootFolderId = 2
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Process",
-                            RootFolderId = 4
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "Final Product",
-                            RootFolderId = 4
-                        });
                 });
 
             modelBuilder.Entity("WebFileExplorer.Models.Folder", b =>

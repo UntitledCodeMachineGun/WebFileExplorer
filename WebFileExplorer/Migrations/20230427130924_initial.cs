@@ -2,8 +2,6 @@
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace WebFileExplorer.Migrations
 {
     /// <inheritdoc />
@@ -29,20 +27,6 @@ namespace WebFileExplorer.Migrations
                         column: x => x.RootFolderId,
                         principalTable: "Folders",
                         principalColumn: "Id");
-                });
-
-            migrationBuilder.InsertData(
-                table: "Folders",
-                columns: new[] { "Id", "Name", "RootFolderId" },
-                values: new object[,]
-                {
-                    { 1, "Creating Digital Images", null },
-                    { 2, "Resources", 1 },
-                    { 3, "Evidence", 1 },
-                    { 4, "Graphic Products", 1 },
-                    { 5, "Primary Sources", 2 },
-                    { 6, "Process", 4 },
-                    { 7, "Final Product", 4 }
                 });
 
             migrationBuilder.CreateIndex(
