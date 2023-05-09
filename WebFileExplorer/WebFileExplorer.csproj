@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\JSONData\" />
-    <Folder Include="wwwroot\Exported\" />
   </ItemGroup>
 
 </Project>

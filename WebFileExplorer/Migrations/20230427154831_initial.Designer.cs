@@ -12,7 +12,7 @@ using WebFileExplorer.Domain;
 namespace WebFileExplorer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230427140511_initial")]
+    [Migration("20230427154831_initial")]
     partial class initial
     {
         /// <inheritdoc />

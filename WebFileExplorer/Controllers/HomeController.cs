@@ -3,6 +3,7 @@ using WebFileExplorer.Domain;
 using WebFileExplorer.Models.VievModels;
 using Newtonsoft.Json;
 using WebFileExplorer.Models;
+using System.Text.Json;
 
 namespace WebFileExplorer.Controllers
 {
@@ -74,19 +75,11 @@ namespace WebFileExplorer.Controllers
         }
 
         [HttpGet]
-        public FileResult Export() 
+        public FileResult Export()
         {
             IQueryable<Folder> folders = dataManager.Folders.GetFolders();
-            var json = JsonConvert.SerializeObject(folders, Formatting.Indented);
-            var fileName = "Exported.json";
-            var path = Path.Combine(env.WebRootPath, "Exported/", fileName);
-            using (StreamWriter sw = new StreamWriter(path))
-            {
-                sw.Write(json);
-            }
-
-            byte[] bytes = System.IO.File.ReadAllBytes(path);
-            return File(bytes, "application/octet-stream", fileName);
+            var json = System.Text.Json.JsonSerializer.SerializeToUtf8Bytes(folders);   
+            return File(json, "application/octet-stream", "Exported.json");
         }
     }
 }
